@@ -1,0 +1,57 @@
+#!/usr/bin/php
+<?php @ini_set('display_errors', 0); error_reporting(0); @ini_set('output_buffering', 'Off'); @ini_set('implicit_flush', 1); @ini_set('zlib.output_compression', 0); ob_implicit_flush(1);
+
+if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1])){ $url = $argv[1];}else{system("clear");
+    die("
+     ▄▄▄▄▄ ▄▄  ▄▄ ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄▄   ▄▄  ▄▄  ▄▄▄
+    █─▄▄▄▄█▄─██─▄█▄─▄─▀█─▄▄▄▄█─▄▄▄─██▀▄─██▄─▀█▄─▄█
+    █▄▄▄▄─██─██─███─▄─▀█▄▄▄▄─█─███▀██─▀─███─█▄▀─██
+    ▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀
+     \033[100mAuthor: zidansec----------------------------\e[0;0m
+
+     SubScan is a tool to quickly scan subdomains
+
+      $> ./subscan exemple.com
+     \n");
+}
+    $home = "
+     ▄▄▄▄▄ ▄▄  ▄▄ ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄▄   ▄▄  ▄▄  ▄▄▄
+    █─▄▄▄▄█▄─██─▄█▄─▄─▀█─▄▄▄▄█─▄▄▄─██▀▄─██▄─▀█▄─▄█
+    █▄▄▄▄─██─██─███─▄─▀█▄▄▄▄─█─███▀██─▀─███─█▄▀─██
+    ▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀
+     \033[100mAuthor: zidansec----------------------------\e[0;0m
+    ";
+    $location = subdomain_scan($url);
+    $scan = json_decode($location, true);
+
+    $subdomains = $scan['subdomains'];
+    
+    if(!empty($subdomains)) {
+
+        system("clear");
+        print_r ("$home\n     \033[1;32mSubdomain of \033[4;32m$url\e[0;0m \033[1;32mfound!\e[0;0m\n\n");
+
+        foreach($subdomains as $subdo) {
+            print_r ("     \033[1;32m[\033[0;36m+\033[1;32m]\e[0;0m http://$subdo\n");
+        }
+
+    }else {
+        print_r ("$home\n\e[0;0m     \e[0;0m\033[1;31mFailed to find subdomain of \033[4;31m$url\e[0;0m\n\n");
+    }
+
+    function subdomain_scan($url) {
+        $api = "https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$url";
+        $cURL = curl_init();
+
+        curl_setopt($cURL, CURLOPT_URL, $api);
+        curl_setopt($cURL, CURLOPT_HTTPGET, true);
+        curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($cURL, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'User-Agent: '.$_SERVER['HTTP_USER_AGENT']
+        ));
+
+        return curl_exec($cURL);
+    }
+?>
