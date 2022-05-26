@@ -2,6 +2,8 @@
 
 > SubScan is a tool to quickly scan subdomains
 
+![subscan](https://i.imgur.com/ZaSnn41.png)
+
 ## Installation
 
 ```bash
@@ -14,4 +16,12 @@ cd subscan
 ./subscan exemple.com
 ```
 
-![subscan](https://i.imgur.com/ZaSnn41.png)
+Or
+
+```bash
+sudo wget https://raw.githubusercontent.com/zidansec/subscan/master/subscan -O /bin/subscan && sudo chmod +x /bin/subscan
+```
+
+```bash
+subscan exemple.com
+```
