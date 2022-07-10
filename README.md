@@ -1,6 +1,6 @@
 # Subscan
 
-> SubScan is a tool to quickly scan subdomains
+> Subscan is a simple tool for subdomain scanner, it can scan subdomains fast.
 
 ![subscan](https://i.imgur.com/ZaSnn41.png)
 
