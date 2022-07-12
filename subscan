@@ -1,5 +1,6 @@
 #!/usr/bin/php
-<?php @ini_set('display_errors', 0); error_reporting(0); @ini_set('output_buffering', 'Off'); @ini_set('implicit_flush', 1); @ini_set('zlib.output_compression', 0); ob_implicit_flush(1);
+
+<?php @ini_set('display_errors', 0); error_reporting(0);
 
 if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1])){ $url = $argv[1];}else{system("clear");
     die("
@@ -9,9 +10,9 @@ if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1]
     ▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀
      \033[100mAuthor: zidansec----------------------------\e[0;0m
 
-     SubScan is a tool to quickly scan subdomains
+     \e[4;1mSubScan\e[0;0m mis a tool to quickly scan subdomains\e[0;0m
 
-      $> ./subscan exemple.com
+      \e[6;31m\e[2;31m$\e[1;31m>\e[0;0m \e[2;32m\e[1;4m./subscan\e[0;0m\e[1;2m exemple.com\e[0;0m
      \n");
 }
     $home = "
@@ -27,22 +28,21 @@ if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1]
     $subdomains = $scan['subdomains'];
     
     if(!empty($subdomains)) {
-
         system("clear");
-        print_r ("$home\n     \033[1;32mSubdomain of \033[4;32m$url\e[0;0m \033[1;32mfound!\e[0;0m\n\n");
-
+        print_r ("$home\n     \033[1;32mSubdomain of\e[0;0m \e[4;2m$url\e[0;0m \033[1;32mfound!\e[0;0m\n\n");
         foreach($subdomains as $subdo) {
             print_r ("     \033[1;32m[\033[0;36m+\033[1;32m]\e[0;0m http://$subdo\n");
         }
 
     }else {
-        print_r ("$home\n\e[0;0m     \e[0;0m\033[1;31mFailed to find subdomain of \033[4;31m$url\e[0;0m\n\n");
+        system("clear");
+        print_r ("$home\n\e[0;0m     \e[0;0m\033[1;31mFailed to find subdomain of\e[0;0m \e[1;2m$url\e[0;0m\n");
     }
 
     function subdomain_scan($url) {
         $api = "https://crimeflare.herokuapp.com/api/subscan/json.php?url=".$url."";
         system("clear");
-        print_r("\n \033[1;27mSearching for subdomains of\e[0;0m $url\n\033[1;32m Loading...\e[0;0m");sleep(3);
+        print_r("\n \033[1;27mSearching for subdomains of\e[0;0m \e[4;2m$url\e[0;0m\n\033[1;32m Loading...\e[0;0m");sleep(3);
 
         $cURL = curl_init();
 
