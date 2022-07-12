@@ -10,7 +10,7 @@ if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1]
     ▀▄▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀
      \033[100mAuthor: zidansec----------------------------\e[0;0m
 
-     \e[4;1mSubScan\e[0;0m mis a tool to quickly scan subdomains\e[0;0m
+     \e[4;1mSubScan\e[0;0m is a tool to quickly scan subdomains\e[0;0m
 
       \e[6;31m\e[2;31m$\e[1;31m>\e[0;0m \e[2;32m\e[1;4m./subscan\e[0;0m\e[1;2m exemple.com\e[0;0m
      \n");
