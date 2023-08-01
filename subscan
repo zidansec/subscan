@@ -39,10 +39,20 @@ if(!empty($_GET['url'])){$url = urldecode($_GET['url']); }elseif(!empty($argv[1]
         print_r ("$home\n\e[0;0m     \e[0;0m\033[1;31mFailed to find subdomain of\e[0;0m \e[1;2m$url\e[0;0m\n");
     }
 
+    function get_domain($url) {
+        $str = '/^(?:https?.\/\/)?(?:[^@\/\n]+@)?(?:)?([^:\/?\n]+).*/m';
+        preg_match_all($str, $url, $matches, PREG_SET_ORDER, 0);
+        foreach ($matches as $key => $value) {
+          //var_dump($value);
+          return $value[1];
+        }
+      }
+
     function subdomain_scan($url) {
-        $api = "https://crimeflare.herokuapp.com/api/subscan/json.php?url=".$url."";
+
+        $api = "http://ci-www.threatcrowd.org/searchApi/v2/domain/report/?domain=".get_domain($url)."";
         system("clear");
-        print_r("\n \033[1;27mSearching for subdomains of\e[0;0m \e[4;2m$url\e[0;0m\n\033[1;32m Loading...\e[0;0m");sleep(3);
+        print_r("\n \033[1;27mSearching for subdomains of\e[0;0m \e[4;2m".get_domain($url)."\e[0;0m\n\033[1;32m Loading...\e[0;0m");sleep(3);
 
         $cURL = curl_init();
 
