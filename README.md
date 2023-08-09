@@ -2,7 +2,9 @@
 
 > Subscan is a simple tool for subdomain scanner, it can scan subdomains fast.
 
-![subscan](https://i.imgur.com/ZaSnn41.png)
+<div align="center">
+  <img src="https://i.imgur.com/ZaSnn41.png" />
+</div>
 
 ## Installation
 
